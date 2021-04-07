@@ -1,0 +1,40 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="16dp">
+
+    <TableLayout
+        android:layout_width="175dp"
+        android:layout_height="match_parent"
+        android:layout_row="0"
+        android:layout_column="0"
+        >
+
+        <LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="143dp"
+                android:layout_height="match_parent"
+                android:text="Sports"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_24" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="30dp"
+            android:layout_height="118dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/football" />
+    </TableLayout>
+
+</GridLayout>

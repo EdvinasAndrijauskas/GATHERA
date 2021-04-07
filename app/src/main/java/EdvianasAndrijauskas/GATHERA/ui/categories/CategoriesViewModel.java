@@ -1,16 +1,16 @@
-package EdvianasAndrijauskas.GATHERA.ui.dashboard;
+package EdvianasAndrijauskas.GATHERA.ui.categories;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class CategoriesViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public CategoriesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is categories fragment");
     }
 
     public LiveData<String> getText() {

@@ -7,15 +7,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv"
+        android:id="@+id/rvCategories"
         android:paddingBottom="55dp"/>
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="20sp" />
+
+
 </LinearLayout>
-
-

@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.dashboard;
+package EdvianasAndrijauskas.GATHERA.ui.favorite;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import EdvianasAndrijauskas.GATHERA.R;
 
-public class DashboardFragment extends Fragment {
+public class FavoriteFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private FavoriteViewModel dashboardViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        dashboardViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_favorite, container, false);
+        final TextView textView = root.findViewById(R.id.text_favorite);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
