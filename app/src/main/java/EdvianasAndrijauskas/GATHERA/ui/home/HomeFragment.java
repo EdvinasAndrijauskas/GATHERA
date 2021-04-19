@@ -45,14 +45,13 @@ public class HomeFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                homeViewModel.searchEventCard(query);
-                searchView.clearFocus();
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                homeViewModel.searchEventCard(newText);
                 return false;
             }
         });

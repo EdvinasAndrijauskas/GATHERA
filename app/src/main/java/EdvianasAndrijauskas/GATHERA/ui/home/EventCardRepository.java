@@ -39,6 +39,7 @@ public class EventCardRepository {
             if (p.getEventName().toLowerCase().contains(query.toLowerCase())) {
                 result.add(p);
             }
+
         }
         searchedEventCard.setValue(result);
     }
