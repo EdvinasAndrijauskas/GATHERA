@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import EdvianasAndrijauskas.GATHERA.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.ViewHolder> {
 
-    private ArrayList<EventCard> eventCardList;
+    private List<EventCard> eventCardList = new ArrayList<>();
 
-    public EventCardAdapter(ArrayList<EventCard> list) {
-        eventCardList = list;
-    }
+
+
 
     @NonNull
     @Override
@@ -40,6 +40,10 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
         //here if statement can do that for example background
     }
 
+    public void updateList(List<EventCard> pokemonList) {
+        this.eventCardList = pokemonList;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return eventCardList.size();

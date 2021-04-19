@@ -1,32 +1,35 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import EdvianasAndrijauskas.GATHERA.R;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-
     private HomeViewModel homeViewModel;
     private RecyclerView recyclerView;
     private RecyclerView eventCardList;
     EventCardAdapter eventCardAdapter;
-    ArrayList<EventCard> eventCardArrayList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        //Recycling view
         recyclerView = (RecyclerView) root.findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true); //every item of the RecyclerView has a fix size
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -36,28 +39,41 @@ public class HomeFragment extends Fragment {
         eventCardList.hasFixedSize();
         eventCardList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //Finding search by Id
+
+        SearchView searchView = root.findViewById(R.id.works);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                homeViewModel.searchEventCard(query);
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+
+        // Floating Action button
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_profile);
+            }
+        });
 
 
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 18));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 19));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 15));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 10));
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 29));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 13));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 2));
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 4));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 9));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 3));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 18));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 17));
-
-
-
-        eventCardAdapter = new EventCardAdapter(eventCardArrayList);
+        eventCardAdapter = new EventCardAdapter();
         eventCardList.setAdapter(eventCardAdapter);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getSearchedEvent().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
         return root;
     }
+
+
 }
