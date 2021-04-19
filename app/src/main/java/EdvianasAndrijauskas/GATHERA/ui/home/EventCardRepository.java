@@ -28,8 +28,9 @@ public class EventCardRepository {
         eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 9));
         eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 3));
         eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 18));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 17));
-
+        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
+        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
+        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
         searchedEventCard.setValue(eventCardArrayList);
     }
     public void searchEventCard(String query){
