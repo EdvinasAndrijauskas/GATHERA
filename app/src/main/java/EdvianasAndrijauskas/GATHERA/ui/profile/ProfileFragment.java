@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             // METHOD TO ADD
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navgiation_addEvent);
             }
         });
         Button signOff = root.findViewById(R.id.home_signOff);
