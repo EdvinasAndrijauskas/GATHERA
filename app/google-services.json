@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "511252668388",
+    "project_id": "gathera-2cd58",
+    "storage_bucket": "gathera-2cd58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511252668388:android:bc11af643aec2508c9f1f1",
+        "android_client_info": {
+          "package_name": "EdvianasAndrijauskas.GATHERA"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511252668388-5elgeh8iuajv50hd8g1j9djvoie6trru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1vov9i6csgo1nKxjb1rWVlUZj6nLF8Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511252668388-5elgeh8iuajv50hd8g1j9djvoie6trru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

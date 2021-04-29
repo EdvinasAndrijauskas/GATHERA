@@ -1,18 +1,25 @@
 package EdvianasAndrijauskas.GATHERA.ui.profile;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 
-public class ProfileViewModel extends ViewModel {
+import EdvianasAndrijauskas.GATHERA.ui.data.UserRepository;
+public class ProfileViewModel extends AndroidViewModel {
+    private final UserRepository userRepository;
 
-    private MutableLiveData<String> mText;
-    public ProfileViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is profile fragment");
+    public ProfileViewModel(Application app) {
+        super(app);
+        userRepository = UserRepository.getInstance(app);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void signOut() {
+        userRepository.signOut();
     }
 }

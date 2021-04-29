@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import EdvianasAndrijauskas.GATHERA.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesEventCardAdapter.ViewHolder> {
 
-    private ArrayList<CategoriesEventCard> categoriesEventCardList;
+    private ArrayList<CategoriesEventCard> categoriesEventCardList ;
 
-    public CategoriesEventCardAdapter(ArrayList<CategoriesEventCard> list) {
-        categoriesEventCardList = list;
+    public CategoriesEventCardAdapter(ArrayList<CategoriesEventCard> categories)
+    {
+        this.categoriesEventCardList = categories;
     }
 
     @NonNull
