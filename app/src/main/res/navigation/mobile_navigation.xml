@@ -29,7 +29,11 @@
         android:id="@+id/navigation_profile"
         android:name="EdvianasAndrijauskas.GATHERA.ui.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_addEventFragment"
+            app:destination="@id/navgiation_addEvent" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_categories"
@@ -49,7 +53,11 @@
             android:id="@+id/action_navigation_signin_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
-
+    <fragment
+        android:id="@+id/navgiation_addEvent"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.addPage.AddEventFragment"
+        android:label="add_event_fragment"
+        tools:layout="@layout/add_event_fragment" />
 
 
 </navigation>

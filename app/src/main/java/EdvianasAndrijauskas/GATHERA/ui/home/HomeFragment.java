@@ -53,12 +53,7 @@ public class HomeFragment extends Fragment {
         });
 
         Button addEventButton = root.findViewById(R.id.home_addEventButton);
-        addEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_profile);
-            }
-        });
+        addEventButton.setOnClickListener(view -> Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_profile));
 
         eventCardAdapter = new EventCardAdapter();
         eventCardList.setAdapter(eventCardAdapter);
