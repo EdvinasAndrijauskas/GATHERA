@@ -19,9 +19,6 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
 
     private List<EventCard> eventCardList = new ArrayList<>();
 
-
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
