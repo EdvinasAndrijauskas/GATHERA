@@ -1,36 +1,60 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
+import android.net.Uri;
+
+import java.net.URI;
+
 public class EventCard {
-    private String day;
-    private String month;
-    private int monthDay;
+    private String date;
     private String time;
     private String eventName;
     private String description;
     private int howManyPeopleAreComing;
-    private int imageId;
+    private String image;
+    private String category;
+    private String userId;
 
-    public EventCard(String day, String month, String time, String eventName, String description, int howManyPeopleAreComing, int imageId, int monthDay) {
-        this.day = day;
-        this.month = month;
+    public EventCard(String userId,String date, String category, String time, String eventName, String description, int howManyPeopleAreComing, String image) {
+        this.date = date;
         this.time = time;
         this.eventName = eventName;
         this.description = description;
         this.howManyPeopleAreComing = howManyPeopleAreComing;
-        this.imageId = imageId;
-        this.monthDay = monthDay;
+        this.image = image;
+        this.category = category;
+        this.userId = userId;
     }
 
-    public int getMonthDay() {
-        return monthDay;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getDay() {
-        return day;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getMonth() {
-        return month;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getTime() {
@@ -47,9 +71,25 @@ public class EventCard {
         return howManyPeopleAreComing;
     }
 
-    public int getImageViewId() {
-        return imageId;
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setHowManyPeopleAreComing(int howManyPeopleAreComing) {
+        this.howManyPeopleAreComing = howManyPeopleAreComing;
+    }
+
+    public void setImageId(String imageId) {
+        this.image = imageId;
+    }
 }
 

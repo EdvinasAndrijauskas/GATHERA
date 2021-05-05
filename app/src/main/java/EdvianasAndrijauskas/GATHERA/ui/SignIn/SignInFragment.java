@@ -35,12 +35,7 @@ public class SignInFragment extends Fragment {
         checkIfSignedIn();
         Button signInButton = root.findViewById(R.id.sign_in_button);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               signIn(view);
-            }
-        });
+        signInButton.setOnClickListener(view -> signIn(view));
         return root;
     }
 
@@ -57,13 +52,12 @@ public class SignInFragment extends Fragment {
 
     public void signIn(View v) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
-                    new AuthUI.IdpConfig.EmailBuilder().build(),
-                    new AuthUI.IdpConfig.GoogleBuilder().build());
+                    new AuthUI.IdpConfig.EmailBuilder().build());
 
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
-                    .setLogo(R.drawable.football)
+                    .setLogo(R.drawable.icon_gthera).setTheme(R.style.Theme_GATHERA)
                     .build();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         }
