@@ -4,11 +4,10 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseUser;
 
-import EdvianasAndrijauskas.GATHERA.ui.data.UserRepository;
+import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
 
 public class SignInViewModel extends AndroidViewModel {
     private final UserRepository userRepository;

@@ -1,11 +1,14 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,24 +23,24 @@ public class EventCardRepository {
 
     public EventCardRepository() {
         eventCardArrayList = new ArrayList<>();
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 18));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 19));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 15));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 10));
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 29));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 13));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 2));
-        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 4));
-        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 9));
-        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 3));
-        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 18));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
-        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
-        searchedEventCard.setValue(eventCardArrayList);
+//        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 18));
+//        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 19));
+//        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 15));
+//        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
+//        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 10));
+//        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 29));
+//        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 11));
+//        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 13));
+//        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 11));
+//        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "Let's go warriors", "Cool", 2, R.drawable.football, 2));
+//        eventCardArrayList.add(new EventCard("Monday", "May", "11:15", "Football", "Cool eveningwith pals", 20, R.drawable.football, 4));
+//        eventCardArrayList.add(new EventCard("Tuesday", "September", "15:30", "Basketball", "Cool eveningwith pals", 22, R.drawable.football, 9));
+//        eventCardArrayList.add(new EventCard("Wednesday", "October", "18:30", "amazing", "Cool Ou he pals", 19, R.drawable.football, 3));
+//        eventCardArrayList.add(new EventCard("Satuday", "September", "9:30", "Wtf is thi", "Cool asdsadas pals", 15, R.drawable.football, 18));
+//        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
+//        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
+//        eventCardArrayList.add(new EventCard("Sunday", "May", "15:00", "wtf's go warriors", "Cool", 2, R.drawable.football, 17));
+//        searchedEventCard.setValue(eventCardArrayList);
     }
 
     public static synchronized EventCardRepository getInstance() {
@@ -51,8 +54,8 @@ public class EventCardRepository {
         eventCard = new EventCardLiveData(myRef);
     }
 
-    public void saveEventCard(String day, String month, String time, String eventName, String description, int howManyPeopleAreComing, int imageId, int monthDay) {
-        myRef.setValue(new EventCard(day,month,time,eventName,description,howManyPeopleAreComing,imageId,monthDay));
+    public void saveEventCard(String userId,String date, String time, String eventName, String description, int howManyPeopleAreComing, String image, String category) {
+        myRef.setValue(new EventCard(userId,date, category, time, eventName, description, howManyPeopleAreComing, image));
     }
 
     public EventCardLiveData getEventCard() {
@@ -65,7 +68,6 @@ public class EventCardRepository {
             if (p.getEventName().toLowerCase().contains(query.toLowerCase())) {
                 result.add(p);
             }
-
         }
         searchedEventCard.setValue(result);
     }

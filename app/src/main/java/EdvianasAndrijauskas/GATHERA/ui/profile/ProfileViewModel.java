@@ -4,9 +4,8 @@ package EdvianasAndrijauskas.GATHERA.ui.profile;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.ViewModel;
 
-import EdvianasAndrijauskas.GATHERA.ui.data.UserRepository;
+import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
 public class ProfileViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
 

@@ -25,14 +25,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        Button createEvent = root.findViewById(R.id.profile_createEvent);
-        createEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navgiation_addEvent);
-            }
-        });
         Button signOff = root.findViewById(R.id.home_signOff);
         signOff.setOnClickListener(new View.OnClickListener() {
             @Override

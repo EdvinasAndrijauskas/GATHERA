@@ -4,4 +4,20 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="username">Username</string>
+
+    <string name="category_prompt">Choose a country</string>
+
+    <string-array name="category_arrays">
+        <item>Sports</item>
+        <item>IT</item>
+        <item>Hobbies</item>
+        <item>Classes</item>
+        <item>Shows</item>
+        <item>Seminar</item>
+        <item>Science</item>
+        <item>Gaming</item>
+        <item>Challenges</item>
+        <item>Cooking</item>
+    </string-array>
+
 </resources>

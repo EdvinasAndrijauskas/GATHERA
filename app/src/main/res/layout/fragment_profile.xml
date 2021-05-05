@@ -7,32 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <Button
-        android:id="@+id/profile_createEvent"
-        android:layout_width="105dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
-        android:text="Create event"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
-
-    </Button>
-
     <TextView
         android:id="@+id/username"
         android:layout_width="236dp"
         android:layout_height="49dp"
-        android:layout_marginTop="4dp"
-        android:text="Username"
-        android:textSize="30dp"
+        android:layout_marginTop="28dp"
         android:gravity="center"
+        android:text="Username"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -47,23 +32,22 @@
         android:src="@drawable/football"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <Button
         android:id="@+id/home_signOff"
         android:layout_width="105dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="60dp"
         android:text="sign Off"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_profile"
-        app:layout_constraintTop_toBottomOf="@+id/profile_createEvent"
         tools:ignore="MissingConstraints">
 
     </Button>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

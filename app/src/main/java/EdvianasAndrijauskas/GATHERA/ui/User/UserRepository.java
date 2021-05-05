@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.data;
+package EdvianasAndrijauskas.GATHERA.ui.User;
 
 import android.app.Application;
 

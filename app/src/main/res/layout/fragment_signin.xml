@@ -5,19 +5,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1c1c1e"
     tools:context=".ui.SignIn.SignInFragment">
 
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="324dp"
+        android:layout_marginBottom="224dp"
         android:onClick="signIn"
+        android:text="Sign in"
+        android:textColor="#efca9f"
+        android:textColorHighlight="@color/black"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/black">
+    </Button>
+
+    <ImageView
+        android:layout_width="423dp"
+        android:layout_height="373dp"
+        android:layout_marginTop="164dp"
+        android:src="@drawable/icon_gthera"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </Button>
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

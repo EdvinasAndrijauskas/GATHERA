@@ -1,16 +1,17 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import java.net.URI;
 import java.util.List;
 
-import EdvianasAndrijauskas.GATHERA.ui.data.UserRepository;
+import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
 
 public class HomeViewModel extends AndroidViewModel {
         private final UserRepository userRepository;
@@ -31,8 +32,8 @@ public class HomeViewModel extends AndroidViewModel {
             return userRepository.getCurrentUser();
         }
 
-        public void saveEventCard(String day, String month, String time, String eventName, String description, int howManyPeopleAreComing, int imageId, int monthDay) {
-            eventRepository.saveEventCard(day,month,time,eventName,description,howManyPeopleAreComing,imageId,monthDay);
+        public void saveEventCard(String userId, String date, String time, String eventName, String description, int howManyPeopleAreComing, String image, String category) {
+            eventRepository.saveEventCard(userId,date,category,time,eventName,howManyPeopleAreComing,image,description);
         }
 
         public LiveData<EventCard> getEvent() {

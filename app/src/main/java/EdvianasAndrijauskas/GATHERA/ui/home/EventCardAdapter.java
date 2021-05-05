@@ -1,6 +1,7 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
 import EdvianasAndrijauskas.GATHERA.R;
+import EdvianasAndrijauskas.GATHERA.ui.addPage.Upload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,13 @@ import java.util.List;
 public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.ViewHolder> {
 
     private List<EventCard> eventCardList = new ArrayList<>();
+    private List<Upload> uploadList;
+    private Context context;
+
+    public EventCardAdapter(List<Upload> uploadList, Context context) {
+        this.uploadList = uploadList;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -32,18 +44,25 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
         holder.name.setText(eventCardList.get(position).getEventName());
         holder.count.setText("People coming: " + eventCardList.get(position).getHowManyPeopleAreComing());
         holder.description.setText(eventCardList.get(position).getDescription());
-        holder.icon.setImageResource(eventCardList.get(position).getImageViewId());
-        holder.when.setText(eventCardList.get(position).getDay() + ", " + eventCardList.get(position).getMonthDay() + " " + eventCardList.get(position).getMonth() + ", " + eventCardList.get(position).getTime());
+        holder.when.setText(eventCardList.get(position).getDate());
+
+        Glide.with(context).load("gs://gathera-2cd58.appspot.com/Images/" + uploadList.get(position).getImageUrl())
+                .into(holder.icon);
+
         //here if statement can do that for example background
     }
 
-    public void updateList(List<EventCard> pokemonList) {
-        this.eventCardList = pokemonList;
+    public void updateList(List<EventCard> eventCards) {
+        this.eventCardList = eventCards;
         notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
         return eventCardList.size();
+    }
+
+    public int getUploadCount() {
+        return uploadList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
