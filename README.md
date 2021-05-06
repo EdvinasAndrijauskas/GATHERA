@@ -18,7 +18,7 @@ Should have requirements:
 
 Could have requirements:
 
-9. As a user, I want to get notifications before the event that I participate in starts
+9.  As a user, I want to get notifications before the event that I participate in starts
 10. As a user, I would like to invite my friends to the event
 11. As a user, I would like to share the event to other platforms
 
