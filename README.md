@@ -12,13 +12,13 @@ Must have requirements:
 
 Should have requirements: 
 
-6. As a user, I want to get notifications before the event that I participate in starts
-7. As a user, I want to follow interested categories
-8. As a user, I want to be able to stop participating in the event
-9. As a user, I want to filter the events
+6. As a user, I want to follow interested categories
+7. As a user, I want to be able to stop participating in the event
+8. As a user, I want to filter the events
 
 Could have requirements:
 
+9. As a user, I want to get notifications before the event that I participate in starts
 10. As a user, I would like to invite my friends to the event
 11. As a user, I would like to share the event to other platforms
 
