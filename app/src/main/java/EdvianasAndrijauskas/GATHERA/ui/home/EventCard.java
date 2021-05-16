@@ -13,8 +13,10 @@ public class EventCard {
     private String image;
     private String category;
     private String userId;
+    private String location;
 
-    public EventCard(String userId,String date, String category, String time, String eventName, String description, int howManyPeopleAreComing, String image) {
+    public EventCard(String location,String userId,String date, String category, String time, String eventName, String description, int howManyPeopleAreComing, String image) {
+        this.location = location;
         this.date = date;
         this.time = time;
         this.eventName = eventName;
@@ -23,6 +25,18 @@ public class EventCard {
         this.image = image;
         this.category = category;
         this.userId = userId;
+    }
+    public EventCard()
+    {
+
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getUserId() {

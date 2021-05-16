@@ -1,30 +1,35 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
-    android:layout_marginTop="16dp">
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp">
 
     <TableLayout
+        android:id="@+id/category_table"
         android:layout_width="175dp"
         android:layout_height="match_parent"
         android:layout_row="0"
-        android:layout_column="0"
-        >
+        android:layout_column="0">
 
         <LinearLayout>
+
             <TextView
                 android:id="@+id/title"
-                android:layout_width="143dp"
-                android:layout_height="match_parent"
-                android:text="Sports"
-                android:textSize="20dp"/>
+                android:layout_width="134dp"
+                android:layout_height="28dp"
+                android:text="Gaming"
+                android:textSize="20dp" />
 
-            <ImageView
-                android:id="@+id/icon"
+            <ImageButton
+                android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_24" />
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/unlickedcategory" />
         </LinearLayout>
 
         <ImageView
@@ -36,5 +41,6 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/football" />
     </TableLayout>
+
 
 </GridLayout>

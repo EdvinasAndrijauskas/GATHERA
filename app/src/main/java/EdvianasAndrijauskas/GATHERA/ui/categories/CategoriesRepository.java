@@ -1,10 +1,8 @@
 package EdvianasAndrijauskas.GATHERA.ui.categories;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
 
 public class CategoriesRepository {
     private final ArrayList<CategoriesEventCard> categoriesEventCardList;
@@ -12,17 +10,16 @@ public class CategoriesRepository {
 
     public CategoriesRepository() {
         this.categoriesEventCardList = new ArrayList<>();
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "It", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Something", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, ">???", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.football, "Sport", R.drawable.ic_baseline_star_24));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.sports, "Sport", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.it, "IT", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.hobbies, "Hobbies", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.classes, "Classes", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.show, "Shows", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.seminar, "Seminar", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.science, "Science", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.gaming, "Gaming", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.challenge, "Challenges", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.cooking, "Cooking", R.drawable.unlickedcategory));
     }
 
     public static synchronized CategoriesRepository getInstance() {
