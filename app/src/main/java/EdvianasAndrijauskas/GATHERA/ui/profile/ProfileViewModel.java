@@ -27,12 +27,14 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
     public void init() {
-        String userId = userRepository.getCurrentUser().getValue().getUid();
-        eventCardRepository.init(userId);
+        eventCardRepository.init();
     }
 
+//    public LiveData<ArrayList<EventCard>> getAllUsersEvents() {
+//        return eventCardRepository.getAllUsersEvents();
+//    }
     public LiveData<ArrayList<EventCard>> getAllEvents() {
-        return eventCardRepository.getAllEventCards();
+        return eventCardRepository.getAllEvents();
     }
 
     public UserRepository getUserRepository() {

@@ -23,8 +23,7 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void init() {
-        String userId = userRepository.getCurrentUser().getValue().getUid();
-        eventCardRepository.init(userId);
+        eventCardRepository.init();
     }
 
     public LiveData<FirebaseUser> getCurrentUser() {
@@ -32,7 +31,7 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public LiveData<ArrayList<EventCard>> getAllEvents() {
-        return eventCardRepository.getAllEventCards();
+        return eventCardRepository.getAllEvents();
     }
 
 //        public void searchEventCard(String query) {

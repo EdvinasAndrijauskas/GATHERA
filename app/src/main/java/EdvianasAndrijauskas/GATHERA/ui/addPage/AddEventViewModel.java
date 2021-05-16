@@ -25,17 +25,13 @@ public class AddEventViewModel extends AndroidViewModel {
         userRepository = UserRepository.getInstance(app);
         eventCardRepository = EventCardRepository.getInstance();
     }
+
     public void init() {
-        String userId = userRepository.getCurrentUser().getValue().getUid();
-        eventCardRepository.init(userId);
+        eventCardRepository.init();
     }
 
-    public void saveEventCard(String stringLocation,String currentUser,String currentDateString,String selectedCategory,String timeString,String nameOfTheEvent,String descriptionOfTheEvent, int numberOfPeople, String image) {
-        eventCardRepository.saveEvent(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent,numberOfPeople, image);
-    }
-
-    public LiveData<ArrayList<EventCard>> getEvents() {
-        return eventCardRepository.getAllEventCards();
+    public void saveEventCard(String stringLocation, String userId, String currentDateString, String selectedCategory, String timeString, String nameOfTheEvent, String descriptionOfTheEvent, int numberOfPeople, String image) {
+        eventCardRepository.saveEvent(stringLocation, userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, numberOfPeople, image);
     }
 
     public UserRepository getUserRepository() {
