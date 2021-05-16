@@ -78,6 +78,7 @@ public class AddEventFragment extends Fragment {
     private String timeString;
     private String selectedCategory;
     private String uriToReturn;
+    private String currentUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
@@ -93,6 +94,7 @@ public class AddEventFragment extends Fragment {
         cancelButton = root.findViewById(R.id.add_event_cancel);
         location = root.findViewById(R.id.add_event_location);
         addEventViewModel.init();
+        currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
 
         BottomNavigationView navView = (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
         if (navView != null) {
@@ -186,17 +188,15 @@ public class AddEventFragment extends Fragment {
                 return;
             }
             if (uriToReturn == null) {
-                String currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
+
                 addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
                 navView.setVisibility(View.VISIBLE);
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
             } else {
-                String currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
                 addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
                 navView.setVisibility(View.VISIBLE);
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
             }
-
         });
         spinnerEditText = root.findViewById(R.id.add_event_editTextForSpinner);
         spinnerEditText.setInputType(InputType.TYPE_NULL);

@@ -1,18 +1,11 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EventCardRepository {
@@ -20,22 +13,26 @@ public class EventCardRepository {
 //    private final MutableLiveData<List<EventCard>> searchedEventCard = new MutableLiveData<>();
     private static EventCardRepository instance;
     private DatabaseReference myRef;
-    private EventCardLiveData eventCard;
+    private EventCardLiveDataForUser eventCard;
+    private ArrayList<String> pushedKeys;
 
-    public EventCardRepository() {
+    public EventCardRepository()
+    {
+        this.pushedKeys = new ArrayList<>();
     }
 
-
-    public void init(String userId) {
-//        myRef.child(userId);
+    public void init() {
         myRef =  FirebaseDatabase.getInstance("https://gathera-2cd58-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Events");
-        eventCard = new EventCardLiveData(myRef);
+        eventCard = new EventCardLiveDataForUser(myRef);
     }
 
-    public void saveEvent(String stringLocation,String currentUser,String currentDateString,String selectedCategory,String timeString,String nameOfTheEvent,String descriptionOfTheEvent, int numberOfPeople, String image) {
-        myRef.push().setValue(new EventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent,numberOfPeople, image));
+
+    public void saveEvent(String stringLocation,String userId,String currentDateString,String selectedCategory,String timeString,String nameOfTheEvent,String descriptionOfTheEvent, int numberOfPeople, String image) {
+        myRef.push().setValue(new EventCard(stringLocation,userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent,numberOfPeople, image));
+
+        pushedKeys.add(myRef.push().toString());
     }
-    public EventCardLiveData getAllEventCards() {
+    public EventCardLiveDataForUser getAllEvents() {
         return eventCard;
     }
 
@@ -54,4 +51,5 @@ public class EventCardRepository {
             instance = new EventCardRepository();
         return instance;
     }
+
 }
