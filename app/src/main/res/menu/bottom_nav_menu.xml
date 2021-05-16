@@ -12,11 +12,6 @@
         android:title="Categories" />
 
     <item
-        android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_baseline_star_24"
-        android:title="Favourite" />
-
-    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="My profile" />

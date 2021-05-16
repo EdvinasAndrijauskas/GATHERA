@@ -52,9 +52,9 @@
     <ImageView
         android:id="@+id/iconn"
         android:layout_width="161dp"
-        android:layout_height="133dp"
+        android:layout_height="115dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/football" />
+        android:src="@drawable/defaultpicture" />
 
 
 </LinearLayout>

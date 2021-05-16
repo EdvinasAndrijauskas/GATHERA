@@ -1,10 +1,15 @@
 package EdvianasAndrijauskas.GATHERA.ui.categories;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +28,7 @@ public class CategoriesFragment extends Fragment {
     private CategoriesEventCardAdapter categoriesEventCardAdapter;
     private CategoriesRepository repository;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         categoriesViewModel = new ViewModelProvider(this).get(CategoriesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_categories, container, false);
@@ -33,6 +39,9 @@ public class CategoriesFragment extends Fragment {
         categoriesEventCardList.setLayoutManager(manager);
         categoriesEventCardAdapter = new CategoriesEventCardAdapter(repository.getCategoriesEventCardList());
         categoriesEventCardList.setAdapter(categoriesEventCardAdapter);
+
+
         return root;
     }
+
 }

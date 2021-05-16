@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,13 +28,18 @@ public class SignInFragment extends Fragment {
     private static final int RC_SIGN_IN = 42;
     private static final int RESULT_OK = -1;
     private SignInViewModel signInViewModel;
+    private BottomNavigationView navView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         signInViewModel = new ViewModelProvider(this).get(SignInViewModel.class);
         View root = inflater.inflate(R.layout.fragment_signin, container, false);
-
         checkIfSignedIn();
         Button signInButton = root.findViewById(R.id.sign_in_button);
+        navView = (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
+        if(navView != null)
+        {
+            navView.setVisibility(View.INVISIBLE);
+        }
 
         signInButton.setOnClickListener(view -> signIn(view));
         return root;
@@ -47,6 +53,10 @@ public class SignInFragment extends Fragment {
     }
 
     private void goToMainFragment() {
+        if(navView != null)
+        {
+            navView.setVisibility(View.VISIBLE);
+        }
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
     }
 

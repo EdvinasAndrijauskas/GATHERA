@@ -1,5 +1,6 @@
 package EdvianasAndrijauskas.GATHERA.ui.addPage;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -29,14 +30,18 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -47,6 +52,13 @@ import com.squareup.picasso.Picasso;
 import EdvianasAndrijauskas.GATHERA.R;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -54,35 +66,45 @@ public class AddEventFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
     private AddEventViewModel addEventViewModel;
     private ImageView view;
-    private Button createButton;
-    private EditText eventName, description, numberOfPeople, spinnerEditText, hourEditText, minuteEditText;
+    private Button createButton, cancelButton;
+    private EditText eventName, description, numberOfPeople, spinnerEditText, hourEditText, minuteEditText, location;
     private Spinner category;
-    private DatabaseReference reff;
     private EventCard eventCard;
     private DatePickerDialog picker;
     private Uri imageData;
     private StorageReference storageRefs;
     private StorageTask uploadTask;
-    private ProgressBar progressBar;
     private String currentDateString;
     private String timeString;
     private String selectedCategory;
+    private String uriToReturn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
         View root = inflater.inflate(R.layout.add_event_fragment, container, false);
         eventName = (EditText) root.findViewById(R.id.add_event_name);
         description = (EditText) root.findViewById(R.id.add_event_description);
-        category =  root.findViewById(R.id.add_event_categorySpinner);
+        category = root.findViewById(R.id.add_event_categorySpinner);
         numberOfPeople = root.findViewById(R.id.add_event_maxNumber);
         hourEditText = root.findViewById(R.id.add_event_hour);
         minuteEditText = root.findViewById(R.id.add_event_minutes);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gathera-2cd58-default-rtdb.europe-west1.firebasedatabase.app/");
-        reff = database.getReference().child("Events");
-        view = root.findViewById(R.id.add_event_image);
         storageRefs = FirebaseStorage.getInstance().getReference("Images");
-        progressBar = root.findViewById(R.id.add_event_progressBar);
+        view = root.findViewById(R.id.add_event_image);
+        cancelButton = root.findViewById(R.id.add_event_cancel);
+        location = root.findViewById(R.id.add_event_location);
+        addEventViewModel.init();
+
+        BottomNavigationView navView = (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
+        if (navView != null) {
+            navView.setVisibility(View.GONE);
+        }
+
+        cancelButton.setOnClickListener(v ->
+        {
+            navView.setVisibility(View.VISIBLE);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
+        });
+
         Button selectImageButton = root.findViewById(R.id.add_event_selectImageButton);
         selectImageButton.setOnClickListener(v -> {
             openFileChooser();
@@ -94,10 +116,10 @@ public class AddEventFragment extends Fragment {
         category.setAdapter(adapter);
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int
-                    i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedCategory = adapterView.getItemAtPosition(i).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -106,47 +128,73 @@ public class AddEventFragment extends Fragment {
         createButton = root.findViewById(R.id.add_event_createButton);
         createButton.setOnClickListener(v ->
         {
-            String  maxNumber = numberOfPeople.getText().toString().trim();
+//            uploadFile();
+//            storageRefs.child("Images/").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    uriToReturn = uri.toString();
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                    // Handle any errors
+//                }
+//            });
+            String maxNumber = numberOfPeople.getText().toString().trim();
             String nameOfTheEvent = eventName.getText().toString().trim();
             String descriptionOfTheEvent = description.getText().toString().trim();
             String hour = hourEditText.getText().toString().trim();
             String minute = minuteEditText.getText().toString().trim();
+            String stringLocation = location.getText().toString().trim();
 
             if (maxNumber.isEmpty()) {
                 numberOfPeople.requestFocus();
                 numberOfPeople.setError("Enter number");
                 numberOfPeople.setText("");
+                return;
+            }
+            if (stringLocation.isEmpty()) {
+                location.requestFocus();
+                location.setError("Enter Location");
+                location.setText("");
+                return;
             }
             if (nameOfTheEvent.isEmpty()) {
                 eventName.requestFocus();
                 eventName.setError("Enter event name");
+                return;
             }
-//            if (categoryOfTheEvent.isEmpty()) {
-//                category.requestFocus();
-//                category.setError("Enter category");
-//            }
+
             if (descriptionOfTheEvent.isEmpty()) {
                 description.requestFocus();
                 description.setError("Enter description");
+                return;
             }
             if (spinnerEditText.getText().toString().isEmpty()) {
                 spinnerEditText.requestFocus();
                 spinnerEditText.setError("Enter date");
+                return;
             }
             timeString = hour + ":" + minute;
-            if (isValidTime(timeString)) {
-                String currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
-                eventCard = new EventCard(currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), uploadFile());
-                reff.push().setValue(eventCard);
-                reff.getKey();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
-            } else {
+            if (!isValidTime(timeString)) {
                 hourEditText.requestFocus();
                 hourEditText.setError("Enter valid time");
                 hourEditText.setText("");
                 minuteEditText.requestFocus();
                 minuteEditText.setError("Enter valid time");
                 minuteEditText.setText("");
+                return;
+            }
+            if (uriToReturn == null) {
+                String currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
+                addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
+                navView.setVisibility(View.VISIBLE);
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
+            } else {
+                String currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
+                addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
+                navView.setVisibility(View.VISIBLE);
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
             }
 
         });
@@ -185,8 +233,9 @@ public class AddEventFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             imageData = data.getData();
-            //fancier than view.setImage()
-            Picasso.get().load(imageData).into(view);
+            //fancier way to set image than view.setImage()
+            view.setImageURI(imageData);
+//            Picasso.get().load(imageData).into(view);
         }
     }
 
@@ -196,43 +245,33 @@ public class AddEventFragment extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private String uploadFile() {
-        if (imageData != null) {
-            StorageReference fileReference = storageRefs.child(System.currentTimeMillis()
-                    + "." + getFileExtension(imageData));
-            String location = System.currentTimeMillis()
-                    + "." + getFileExtension(imageData);
-            uploadTask = fileReference.putFile(imageData)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(0);
-                                }
-                            }, 500);
-                            Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            progressBar.setProgress((int) progress);
-                        }
-                    });
-            return location;
-        }
-        return null;
-    }
+//    private void uploadFile() {
+//        if (imageData != null) {
+//
+//            StorageReference fileReference = storageRefs.child(System.currentTimeMillis()
+//                    + "." + getFileExtension(imageData));
+//
+//            uploadTask = fileReference.putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
+//                }
+//            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                    double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+//                    int IntValue = (int) Math.round(progress);
+//                    Toast.makeText(getContext(), IntValue + "% uploaded please wait", Toast.LENGTH_SHORT).show();
+//                }
+//            })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//        }
+//    }
 
     public static boolean isValidTime(String time) {
         // Regex to check valid time in 24-hour format.
@@ -244,8 +283,6 @@ public class AddEventFragment extends Fragment {
         Matcher m = p.matcher(time);
         return m.matches();
     }
-
-
 }
 
 

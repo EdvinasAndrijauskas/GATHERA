@@ -8,25 +8,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 
-public class EventCardLiveData extends LiveData<EventCard> {
+public class EventCardLiveData extends LiveData<ArrayList<EventCard>> {
 
     private final ValueEventListener listener = new ValueEventListener() {
+
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            EventCard eventCard = snapshot.getValue(EventCard.class);
-            setValue(eventCard);
+            ArrayList<EventCard> list = new ArrayList<>();
+            for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                EventCard eventCard = dataSnapshot.getValue(EventCard.class);
+                list.add(eventCard);
+                setValue(list);
+            }
         }
-
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-
         }
     };
     DatabaseReference databaseReference;
 
-    public EventCardLiveData(DatabaseReference ref) {
-        databaseReference = ref;
+    public EventCardLiveData(DatabaseReference reference){
+        databaseReference = reference;
     }
 
     @Override
@@ -40,4 +44,5 @@ public class EventCardLiveData extends LiveData<EventCard> {
         super.onInactive();
         databaseReference.removeEventListener(listener);
     }
+
 }
