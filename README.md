@@ -4,27 +4,26 @@ I chose this app idea, because I feel that there is always lack of people when y
 
 Must have requirements:
 
-1. As a user, I want to be able to make an account
-2. As a user, I want to be able to create an event
-3. As a user, I want to be able to manage my events and account
-4. As a user, I want to be able to see all available events
-5. As a user, I want to be able to join the event
+[x] As a user, I want to be able to make an account
+[x] As a user, I want to be able to create an event
+[x]. As a user, I want to be able to manage my events
+[x]. As a user, I want to be able to see all available events
+[ ] As a user, I want to be able to join the event
 
 Should have requirements: 
 
-6. As a user, I want to follow interested categories
-7. As a user, I want to be able to stop participating in the event
-8. As a user, I want to filter the events
+[ ] As a user, I want to follow interested categories
+[ ] As a user, I want to be able to stop participating in the event
+[x] As a user, I want to filter the events
 
 Could have requirements:
 
-9.  As a user, I want to get notifications before the event that I participate in starts
-10. As a user, I would like to invite my friends to the event
-11. As a user, I would like to share the event to other platforms
-
+[ ]  As a user, I want to get notifications before the event that I participate in starts
+[ ] As a user, I would like to share the event to other platforms
 
 Will not have requirements:
 
-12. As a user, I want to add people to my friend list
-13. As a user, I would like to chat with my friends
+[x] As a user, I would like to invite my friends to the event
+[x] As a user, I want to add people to my friend list
+[x] As a user, I would like to chat with my friends
 
