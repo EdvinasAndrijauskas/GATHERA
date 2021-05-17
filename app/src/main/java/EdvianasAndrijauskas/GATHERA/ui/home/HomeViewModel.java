@@ -34,11 +34,11 @@ public class HomeViewModel extends AndroidViewModel {
         return eventCardRepository.getAllEvents();
     }
 
-//        public void searchEventCard(String query) {
-//            eventCardRepository.searchEventCard(query);
-//        }
-//
-//        public LiveData<List<EventCard>> getSearchedEvent() {
-//            return eventCardRepository.getSearchedEvent();
-//        }
+        public void searchEventCard(String query) {
+            eventCardRepository.searchEventCard(query);
+        }
+
+        public LiveData<ArrayList<EventCard>> getSearchedEvent() {
+            return eventCardRepository.getSearchedEventCards();
+        }
 }

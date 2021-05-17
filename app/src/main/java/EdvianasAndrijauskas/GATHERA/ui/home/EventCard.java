@@ -102,8 +102,6 @@ public class EventCard {
         this.howManyPeopleAreComing = howManyPeopleAreComing;
     }
 
-    public void setImageId(String imageId) {
-        this.image = imageId;
-    }
+
 }
 

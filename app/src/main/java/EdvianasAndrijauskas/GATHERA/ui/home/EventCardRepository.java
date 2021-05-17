@@ -1,6 +1,9 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,6 +18,7 @@ public class EventCardRepository {
     private DatabaseReference myRef;
     private EventCardLiveDataForUser eventCard;
     private ArrayList<String> pushedKeys;
+    private final MutableLiveData<ArrayList<EventCard>> searchedEventCard = new MutableLiveData<>();
 
     public EventCardRepository()
     {
@@ -36,15 +40,19 @@ public class EventCardRepository {
         return eventCard;
     }
 
-//    public void searchEventCard(String query) {
-//        List<EventCard> result = new ArrayList<>();
-//        for (EventCard p : eventCardArrayList) {
-//            if (p.getEventName().toLowerCase().contains(query.toLowerCase())) {
-//                result.add(p);
-//            }
-//        }
-//        searchedEventCard.setValue(result);
-//    }
+    public void searchEventCard(String query) {
+        ArrayList<EventCard> result = new ArrayList<>();
+        for (EventCard p : eventCard.getValue()) {
+            if (p.getEventName().toLowerCase().contains(query.toLowerCase())) {
+                result.add(p);
+            }
+        }
+        searchedEventCard.setValue(result);
+    }
+
+    public LiveData<ArrayList<EventCard>> getSearchedEventCards() {
+        return searchedEventCard;
+    }
 
     public static synchronized EventCardRepository getInstance() {
         if (instance == null)

@@ -1,6 +1,7 @@
 package EdvianasAndrijauskas.GATHERA.ui.addPage;
 
 import android.app.Application;
+import android.net.Uri;
 import android.widget.TextView;
 
 import androidx.lifecycle.AndroidViewModel;

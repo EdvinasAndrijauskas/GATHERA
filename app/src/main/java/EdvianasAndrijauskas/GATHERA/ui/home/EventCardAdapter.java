@@ -2,6 +2,7 @@ package EdvianasAndrijauskas.GATHERA.ui.home;
 
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +34,8 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
 
     private ArrayList<EventCard> eventCardList = new ArrayList<>();
     private Context context;
-    StorageReference storageRefs;
 
-    public EventCardAdapter(Context context) {
+    public EventCardAdapter(Context context)  {
         this.context = context;
     }
 
@@ -52,16 +52,9 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
         holder.count.setText("People coming: " + eventCardList.get(position).getHowManyPeopleAreComing());
         holder.description.setText(eventCardList.get(position).getDescription());
         holder.when.setText(eventCardList.get(position).getDate());
-//        Glide.with(context)
-//                .load(eventCardList.get(position).getImage())
-//                .into(holder.icon);
-
-//        Picasso.get()
-//                .load(eventCardList.get(position).getImage())
-//                .error(R.drawable.defaultpicture)
-//                .into(holder.icon);
-
-
+        Glide.with(context)
+                .load(eventCardList.get(position).getImage())
+                .into(holder.icon);
         //here if statement can do that for example background
     }
 

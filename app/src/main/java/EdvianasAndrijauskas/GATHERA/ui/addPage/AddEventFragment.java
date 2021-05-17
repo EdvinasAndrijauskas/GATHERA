@@ -2,6 +2,7 @@ package EdvianasAndrijauskas.GATHERA.ui.addPage;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +30,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -77,8 +83,8 @@ public class AddEventFragment extends Fragment {
     private String currentDateString;
     private String timeString;
     private String selectedCategory;
-    private String uriToReturn;
     private String currentUser;
+    private String downloadUri = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addEventViewModel = new ViewModelProvider(this).get(AddEventViewModel.class);
@@ -89,12 +95,13 @@ public class AddEventFragment extends Fragment {
         numberOfPeople = root.findViewById(R.id.add_event_maxNumber);
         hourEditText = root.findViewById(R.id.add_event_hour);
         minuteEditText = root.findViewById(R.id.add_event_minutes);
-        storageRefs = FirebaseStorage.getInstance().getReference("Images");
+        storageRefs = FirebaseStorage.getInstance().getReference();
         view = root.findViewById(R.id.add_event_image);
         cancelButton = root.findViewById(R.id.add_event_cancel);
         location = root.findViewById(R.id.add_event_location);
         addEventViewModel.init();
         currentUser = addEventViewModel.getUserRepository().getCurrentUser().getValue().getUid();
+
 
         BottomNavigationView navView = (BottomNavigationView) getActivity().findViewById(R.id.nav_view);
         if (navView != null) {
@@ -130,18 +137,7 @@ public class AddEventFragment extends Fragment {
         createButton = root.findViewById(R.id.add_event_createButton);
         createButton.setOnClickListener(v ->
         {
-//            uploadFile();
-//            storageRefs.child("Images/").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    uriToReturn = uri.toString();
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception exception) {
-//                    // Handle any errors
-//                }
-//            });
+            UploadDownloadImageFileToFirebaseStorage();
             String maxNumber = numberOfPeople.getText().toString().trim();
             String nameOfTheEvent = eventName.getText().toString().trim();
             String descriptionOfTheEvent = description.getText().toString().trim();
@@ -187,16 +183,18 @@ public class AddEventFragment extends Fragment {
                 minuteEditText.setText("");
                 return;
             }
-            if (uriToReturn == null) {
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), downloadUri);
+                }
+            }, 6000);
 
-                addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
-                navView.setVisibility(View.VISIBLE);
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
-            } else {
-                addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
-                navView.setVisibility(View.VISIBLE);
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
-            }
+
+            navView.setVisibility(View.VISIBLE);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
+
         });
         spinnerEditText = root.findViewById(R.id.add_event_editTextForSpinner);
         spinnerEditText.setInputType(InputType.TYPE_NULL);
@@ -245,16 +243,67 @@ public class AddEventFragment extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+    public void UploadDownloadImageFileToFirebaseStorage() {
+        if (imageData != null) {
+            StorageReference ref = storageRefs.child("Images/" + System.currentTimeMillis() + "." + getFileExtension(imageData));
+            uploadTask = ref.putFile(imageData);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getContext(), "Image Uploaded Successfully ", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+
+            Toast.makeText(getContext(), "Please Select Image or Add Image Name", Toast.LENGTH_SHORT).show();
+        }
+        final StorageReference ref = storageRefs.child("Images/" + System.currentTimeMillis() + "." + getFileExtension(imageData));
+        uploadTask = ref.putFile(imageData);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                return ref.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri uri = task.getResult();
+                    downloadUri = uri.toString();
+                    System.out.println(downloadUri);
+                } else {
+
+                }
+            }
+        });
+    }
+
 //    private void uploadFile() {
 //        if (imageData != null) {
 //
-//            StorageReference fileReference = storageRefs.child(System.currentTimeMillis()
-//                    + "." + getFileExtension(imageData));
-//
+//            StorageReference fileReference = storageRefs.child(imageData.getLastPathSegment());
+//            name = imageData.getLastPathSegment();
 //            uploadTask = fileReference.putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 //                @Override
 //                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 //                    Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
+////                    System.out.println(name);
+////                    System.out.println(storageRefs.child(name));
+//                    storageRefs.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            downloadUri = uri.toString();
+//                        }
+//                    });
 //                }
 //            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 //                @Override
@@ -271,6 +320,19 @@ public class AddEventFragment extends Fragment {
 //                        }
 //                    });
 //        }
+//    }
+
+//    private String getUrlAsync() {
+//        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+//        StorageReference dateRef = storageRef.child("Images/" + name);
+//        System.out.println(dateRef);
+//        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                downloadUri = uri.toString();
+//            }
+//        });
+//        return downloadUri;
 //    }
 
     public static boolean isValidTime(String time) {

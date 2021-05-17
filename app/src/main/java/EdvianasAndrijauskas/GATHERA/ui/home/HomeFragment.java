@@ -37,24 +37,27 @@ public class HomeFragment extends Fragment {
         eventCardAdapter = new EventCardAdapter(getContext());
         eventCardListRecycleView.setAdapter(eventCardAdapter);
         homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
+        homeViewModel.getSearchedEvent().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
 
-//        //Finding search by Id
-//        SearchView searchView = root.findViewById(R.id.works);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                homeViewModel.searchEventCard(newText);
-//                return false;
-//            }
-//        });
+        //Finding search by Id
+        SearchView searchView = root.findViewById(R.id.works);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                homeViewModel.searchEventCard(newText);
+                return false;
+            }
+        });
 
         Button addEventButton = root.findViewById(R.id.home_addEventButton);
-        addEventButton.setOnClickListener(view -> { Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navgiation_addEvent); });
+        addEventButton.setOnClickListener(view -> {
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navgiation_addEvent);
+        });
         return root;
     }
 
