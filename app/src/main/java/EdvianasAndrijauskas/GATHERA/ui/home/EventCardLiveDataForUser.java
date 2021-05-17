@@ -27,6 +27,7 @@ public class EventCardLiveDataForUser extends LiveData<ArrayList<EventCard>> {
             ArrayList<EventCard> list = new ArrayList<>();
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                 EventCard eventCard = dataSnapshot.getValue(EventCard.class);
+                eventCard.setId(dataSnapshot.getKey());
                 list.add(eventCard);
                 setValue(list);
             }

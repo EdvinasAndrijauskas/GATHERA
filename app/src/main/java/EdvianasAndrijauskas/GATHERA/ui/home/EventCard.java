@@ -5,6 +5,7 @@ import android.net.Uri;
 import java.net.URI;
 
 public class EventCard {
+    private String id;
     private String date;
     private String time;
     private String eventName;
@@ -102,6 +103,12 @@ public class EventCard {
         this.howManyPeopleAreComing = howManyPeopleAreComing;
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }
 
