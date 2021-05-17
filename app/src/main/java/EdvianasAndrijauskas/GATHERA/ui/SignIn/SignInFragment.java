@@ -67,7 +67,7 @@ public class SignInFragment extends Fragment {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
-                    .setLogo(R.drawable.icon_gthera).setTheme(R.style.Theme_GATHERA)
+                    .setTheme(R.style.Theme_GATHERA)
                     .build();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         }

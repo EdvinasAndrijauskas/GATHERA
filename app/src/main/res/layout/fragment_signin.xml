@@ -5,17 +5,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1c1c1e"
+    android:background="#FFFFFF"
     tools:context=".ui.SignIn.SignInFragment">
 
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="224dp"
+        android:layout_marginBottom="184dp"
         android:onClick="signIn"
         android:text="Sign in"
-        android:textColor="#efca9f"
+        android:textColor="@color/black"
         android:textColorHighlight="@color/black"
         app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,13 +23,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/black">
+
     </Button>
 
     <ImageView
         android:layout_width="423dp"
         android:layout_height="373dp"
-        android:layout_marginTop="164dp"
-        android:src="@drawable/icon_gthera"
+        android:layout_marginTop="112dp"
+        android:src="@drawable/gathera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

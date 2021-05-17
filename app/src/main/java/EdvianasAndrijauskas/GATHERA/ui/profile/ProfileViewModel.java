@@ -30,9 +30,7 @@ public class ProfileViewModel extends AndroidViewModel {
         eventCardRepository.init();
     }
 
-//    public LiveData<ArrayList<EventCard>> getAllUsersEvents() {
-//        return eventCardRepository.getAllUsersEvents();
-//    }
+
     public LiveData<ArrayList<EventCard>> getAllEvents() {
         return eventCardRepository.getAllEvents();
     }

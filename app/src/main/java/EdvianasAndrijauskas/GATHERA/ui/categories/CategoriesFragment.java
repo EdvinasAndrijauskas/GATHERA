@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +41,9 @@ public class CategoriesFragment extends Fragment {
         categoriesEventCardList.setLayoutManager(manager);
         categoriesEventCardAdapter = new CategoriesEventCardAdapter(repository.getCategoriesEventCardList());
         categoriesEventCardList.setAdapter(categoriesEventCardAdapter);
+
+
+
 
 
         return root;

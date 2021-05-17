@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,6 +69,9 @@ public class ProfileFragment extends Fragment {
 
         TextView username = root.findViewById(R.id.username);
         username.setText(profileViewModel.getUserRepository().getCurrentUser().getValue().getDisplayName());
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouch(eventCardAdapter));
+        itemTouchHelper.attachToRecyclerView(eventCardListRecycleView);
 
 
         return root;

@@ -29,6 +29,10 @@ public class EventCardRepository {
         myRef =  FirebaseDatabase.getInstance("https://gathera-2cd58-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Events");
         eventCard = new EventCardLiveDataForUser(myRef);
     }
+    public void deleteEvent(String id)
+    {
+        myRef.child(id).removeValue();
+    }
 
 
     public void saveEvent(String stringLocation,String userId,String currentDateString,String selectedCategory,String timeString,String nameOfTheEvent,String descriptionOfTheEvent, int numberOfPeople, String image) {
