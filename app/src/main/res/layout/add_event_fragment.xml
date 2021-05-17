@@ -12,7 +12,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.addPage.AddEventFragment">
 
-
         <TextView
             android:id="@+id/add_event"
             android:layout_width="match_parent"
