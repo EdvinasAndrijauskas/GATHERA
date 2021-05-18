@@ -18,7 +18,7 @@ Should have requirements:
 Could have requirements:
 
 - [ ] As a user, I want to get notifications before the event that I participate in starts
-- [ ] As a user, I would like to share the event to other platforms
+- [x] As a user, I would like to share the event to other platforms
 
 Will not have requirements:
 
