@@ -53,17 +53,8 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.squareup.picasso.Picasso;
-
 import EdvianasAndrijauskas.GATHERA.R;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -75,7 +66,6 @@ public class AddEventFragment extends Fragment {
     private Button createButton, cancelButton;
     private EditText eventName, description, numberOfPeople, spinnerEditText, hourEditText, minuteEditText, location;
     private Spinner category;
-    private EventCard eventCard;
     private DatePickerDialog picker;
     private Uri imageData;
     private StorageReference storageRefs;
@@ -187,7 +177,7 @@ public class AddEventFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    addEventViewModel.saveEventCard(stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), downloadUri);
+                    addEventViewModel.saveEventCard(0, stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), downloadUri);
                 }
             }, 6000);
 
@@ -279,7 +269,6 @@ public class AddEventFragment extends Fragment {
                 if (task.isSuccessful()) {
                     Uri uri = task.getResult();
                     downloadUri = uri.toString();
-                    System.out.println(downloadUri);
                 } else {
 
                 }
@@ -287,53 +276,7 @@ public class AddEventFragment extends Fragment {
         });
     }
 
-//    private void uploadFile() {
-//        if (imageData != null) {
-//
-//            StorageReference fileReference = storageRefs.child(imageData.getLastPathSegment());
-//            name = imageData.getLastPathSegment();
-//            uploadTask = fileReference.putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Toast.makeText(getContext(), "Upload successful", Toast.LENGTH_LONG).show();
-////                    System.out.println(name);
-////                    System.out.println(storageRefs.child(name));
-//                    storageRefs.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                        @Override
-//                        public void onSuccess(Uri uri) {
-//                            downloadUri = uri.toString();
-//                        }
-//                    });
-//                }
-//            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                    double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-//                    int IntValue = (int) Math.round(progress);
-//                    Toast.makeText(getContext(), IntValue + "% uploaded please wait", Toast.LENGTH_SHORT).show();
-//                }
-//            })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//        }
-//    }
 
-//    private String getUrlAsync() {
-//        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//        StorageReference dateRef = storageRef.child("Images/" + name);
-//        System.out.println(dateRef);
-//        dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                downloadUri = uri.toString();
-//            }
-//        });
-//        return downloadUri;
-//    }
 
     public static boolean isValidTime(String time) {
         // Regex to check valid time in 24-hour format.

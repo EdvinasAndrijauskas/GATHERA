@@ -6,6 +6,7 @@ import java.net.URI;
 
 public class EventCard {
     private String id;
+    private int peopleAttending;
     private String date;
     private String time;
     private String eventName;
@@ -16,7 +17,8 @@ public class EventCard {
     private String userId;
     private String location;
 
-    public EventCard(String location,String userId,String date, String category, String time, String eventName, String description, int howManyPeopleAreComing, String image) {
+    public EventCard(int peopleAttending, String location,String userId,String date, String category, String time, String eventName, String description, int howManyPeopleAreComing, String image) {
+        this.peopleAttending = peopleAttending;
         this.location = location;
         this.date = date;
         this.time = time;
@@ -30,6 +32,14 @@ public class EventCard {
     public EventCard()
     {
 
+    }
+
+    public int getPeopleAttending() {
+        return peopleAttending;
+    }
+
+    public void setPeopleAttending(int peopleAttending) {
+        this.peopleAttending = peopleAttending;
     }
 
     public String getLocation() {

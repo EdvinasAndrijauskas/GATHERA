@@ -8,29 +8,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 
 import EdvianasAndrijauskas.GATHERA.R;
+
 import java.util.ArrayList;
 
 public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.ViewHolder> {
 
     private ArrayList<EventCard> eventCardList = new ArrayList<>();
     private Context context;
+    private OnListItemClickListener mOnListItemClickListener;
 
-    public EventCardAdapter(Context context) {
+    public EventCardAdapter(Context context, OnListItemClickListener mOnListItemClickListener) {
         this.context = context;
+        this.mOnListItemClickListener = mOnListItemClickListener;
+    }
+    public EventCardAdapter() {
     }
 
     public Context getContext() {
         return context;
     }
 
-    public void deleteItem(int position){
+    public void deleteItem(int position) {
         EventCard eventCard = eventCardList.get(position);
         EventCardRepository.getInstance().deleteEvent(eventCard.getId());
+    }
+
+    public interface OnListItemClickListener {
+        void onListItemClick(int clickedItemIndex);
     }
 
     @NonNull
@@ -44,10 +55,10 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(eventCardList.get(position).getEventName());
-        holder.count.setText("People attending: " + eventCardList.get(position).getHowManyPeopleAreComing());
+        holder.count.setText("People attending:" + eventCardList.get(position).getPeopleAttending() + "/" + eventCardList.get(position).getHowManyPeopleAreComing());
         holder.when.setText(eventCardList.get(position).getDate());
         holder.time.setText(eventCardList.get(position).getTime());
-        Glide.with(context).load(eventCardList.get(position).getImage()).override(400,300).fitCenter().centerCrop().into(holder.icon);
+        Glide.with(context).load(eventCardList.get(position).getImage()).override(400, 300).fitCenter().centerCrop().into(holder.icon);
         //here if statement can do that for example background
     }
 
@@ -55,6 +66,10 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
         this.eventCardList = eventCards;
         notifyDataSetChanged();
     }
+    public void update() {
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {
@@ -62,7 +77,7 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         TextView count;
         TextView time;
@@ -76,7 +91,12 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
             time = itemView.findViewById(R.id.time);
             icon = itemView.findViewById(R.id.iconn);
             when = itemView.findViewById(R.id.when);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnListItemClickListener.onListItemClick(getAdapterPosition());
         }
     }
-
 }

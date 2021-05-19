@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 public class EventCardRepository {
-//    private final List<EventCard> eventCardArrayList = new ArrayList<>();
+    //    private final List<EventCard> eventCardArrayList = new ArrayList<>();
 //    private final MutableLiveData<List<EventCard>> searchedEventCard = new MutableLiveData<>();
     private static EventCardRepository instance;
     private DatabaseReference myRef;
@@ -20,26 +20,26 @@ public class EventCardRepository {
     private ArrayList<String> pushedKeys;
     private final MutableLiveData<ArrayList<EventCard>> searchedEventCard = new MutableLiveData<>();
 
-    public EventCardRepository()
-    {
+    public EventCardRepository() {
         this.pushedKeys = new ArrayList<>();
     }
 
     public void init() {
-        myRef =  FirebaseDatabase.getInstance("https://gathera-2cd58-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Events");
+        myRef = FirebaseDatabase.getInstance("https://gathera-2cd58-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Events");
         eventCard = new EventCardLiveDataForUser(myRef);
     }
-    public void deleteEvent(String id)
-    {
+
+    public void deleteEvent(String id) {
         myRef.child(id).removeValue();
     }
 
 
-    public void saveEvent(String stringLocation,String userId,String currentDateString,String selectedCategory,String timeString,String nameOfTheEvent,String descriptionOfTheEvent, int numberOfPeople, String image) {
-        myRef.push().setValue(new EventCard(stringLocation,userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent,numberOfPeople, image));
+    public void saveEvent(int peopleAtending, String stringLocation, String userId, String currentDateString, String selectedCategory, String timeString, String nameOfTheEvent, String descriptionOfTheEvent, int numberOfPeople, String image) {
+        myRef.push().setValue(new EventCard(peopleAtending, stringLocation, userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, numberOfPeople, image));
 
         pushedKeys.add(myRef.push().toString());
     }
+
     public EventCardLiveDataForUser getAllEvents() {
         return eventCard;
     }
