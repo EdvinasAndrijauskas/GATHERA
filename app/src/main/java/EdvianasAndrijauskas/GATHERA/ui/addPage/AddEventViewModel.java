@@ -31,8 +31,8 @@ public class AddEventViewModel extends AndroidViewModel {
         eventCardRepository.init();
     }
 
-    public void saveEventCard(String stringLocation, String userId, String currentDateString, String selectedCategory, String timeString, String nameOfTheEvent, String descriptionOfTheEvent, int numberOfPeople, String image) {
-        eventCardRepository.saveEvent(stringLocation, userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, numberOfPeople, image);
+    public void saveEventCard(int peopleAtending, String stringLocation, String userId, String currentDateString, String selectedCategory, String timeString, String nameOfTheEvent, String descriptionOfTheEvent, int numberOfPeople, String image) {
+        eventCardRepository.saveEvent(peopleAtending, stringLocation, userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, numberOfPeople, image);
     }
 
     public UserRepository getUserRepository() {

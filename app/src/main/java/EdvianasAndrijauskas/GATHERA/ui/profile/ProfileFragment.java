@@ -10,27 +10,22 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCardAdapter;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements EventCardAdapter.OnListItemClickListener {
 
     private ProfileViewModel profileViewModel;
     private RecyclerView eventCardListRecycleView;
@@ -48,7 +43,7 @@ public class ProfileFragment extends Fragment {
         eventCardListRecycleView = root.findViewById(R.id.profile_rv);
         eventCardListRecycleView.hasFixedSize();
         eventCardListRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        eventCardAdapter = new EventCardAdapter(getContext());
+        eventCardAdapter = new EventCardAdapter(getContext(),this);
         eventCardListRecycleView.setAdapter(eventCardAdapter);
 
         profileViewModel.getAllEvents().observe(getViewLifecycleOwner(), allEvents -> {
@@ -82,4 +77,8 @@ public class ProfileFragment extends Fragment {
         //has to be bind somewhere(probably in profile (where do I want it ))
     }
 
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+
+    }
 }

@@ -1,5 +1,6 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import EdvianasAndrijauskas.GATHERA.R;
+import EdvianasAndrijauskas.GATHERA.ui.SelectedEventActivity;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EventCardAdapter.OnListItemClickListener {
     private HomeViewModel homeViewModel;
     private RecyclerView eventCardListRecycleView;
     private EventCardAdapter eventCardAdapter;
-
+    private Gson gson;
+    private ArrayList<EventCard> list = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -33,12 +39,12 @@ public class HomeFragment extends Fragment {
         eventCardListRecycleView = root.findViewById(R.id.home_rv);
         eventCardListRecycleView.hasFixedSize();
         eventCardListRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        eventCardAdapter = new EventCardAdapter(getContext());
+        this.gson = new Gson();
+        eventCardAdapter = new EventCardAdapter(getContext(), this);
         eventCardListRecycleView.setAdapter(eventCardAdapter);
-        homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
-        homeViewModel.getSearchedEvent().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
 
+        homeViewModel.getAllEvents().observe(getViewLifecycleOwner(),  eventCardAdapter::updateList);
+        homeViewModel.getSearchedEvent().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
         //Finding search by Id
         SearchView searchView = root.findViewById(R.id.works);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -70,6 +76,14 @@ public class HomeFragment extends Fragment {
 
     private void startLoginActivity() {
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_signin);
+    }
+
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        Intent intent = new Intent(getContext(), SelectedEventActivity.class);
+        String toNewView = gson.toJson(homeViewModel.getAllEvents().getValue().get(clickedItemIndex));
+        intent.putExtra("EventCard", toNewView);
+        startActivityForResult(intent, 1);
     }
 
 }
