@@ -8,7 +8,7 @@ Must have requirements:
 - [x] As a user, I want to be able to create an event
 - [x] As a user, I want to be able to manage my events
 - [x] As a user, I want to be able to see all available events
-- [ ] As a user, I want to be able to join/unjoin the event
+- [x] As a user, I want to be able to join/unjoin the event
 
 Should have requirements: 
 
