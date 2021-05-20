@@ -51,7 +51,7 @@
         tools:layout="@layout/add_event_fragment" />
     <fragment
         android:id="@+id/navgiation_editEvent"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.editPage.EditEventFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.EditFragment"
         android:label="add_event_fragment"
         tools:layout="@layout/add_event_fragment" />
 

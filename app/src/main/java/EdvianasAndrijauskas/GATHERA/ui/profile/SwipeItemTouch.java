@@ -18,7 +18,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class SwipeItemTouch extends ItemTouchHelper.SimpleCallback {
     private EventCardAdapter eventCardAdapterAdapter;
 
-    public SwipeItemTouch(EventCardAdapter eventCardAdapter){
+    public SwipeItemTouch(EventCardAdapter eventCardAdapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.eventCardAdapterAdapter = eventCardAdapter;
     }
@@ -31,7 +31,7 @@ public class SwipeItemTouch extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
-        if(direction == ItemTouchHelper.LEFT){
+        if (direction == ItemTouchHelper.LEFT) {
             AlertDialog.Builder builder = new AlertDialog.Builder(eventCardAdapterAdapter.getContext());
             builder.setTitle("Delete task");
             builder.setMessage("Are you sure you want to delete this task?");
@@ -49,9 +49,8 @@ public class SwipeItemTouch extends ItemTouchHelper.SimpleCallback {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-        }
-        else {
-            Navigation.findNavController((Activity) eventCardAdapterAdapter.getContext(), R.id.nav_host_fragment).navigate(R.id.navgiation_editEvent);
+        } else {
+            eventCardAdapterAdapter.editCard(position);
         }
     }
 
@@ -60,7 +59,7 @@ public class SwipeItemTouch extends ItemTouchHelper.SimpleCallback {
         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                 .addSwipeLeftBackgroundColor(ContextCompat.getColor(eventCardAdapterAdapter.getContext(), R.color.delete))
                 .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete_24)
-                .addSwipeRightBackgroundColor(ContextCompat.getColor(eventCardAdapterAdapter.getContext(),R.color.edit))
+                .addSwipeRightBackgroundColor(ContextCompat.getColor(eventCardAdapterAdapter.getContext(), R.color.edit))
                 .addSwipeRightActionIcon(R.drawable.ic_baseline_edit_24)
                 .create().decorate();
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);

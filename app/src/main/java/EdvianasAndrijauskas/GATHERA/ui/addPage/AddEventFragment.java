@@ -203,8 +203,6 @@ public class AddEventFragment extends Fragment {
                             cldr.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             spinnerEditText.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                             currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(cldr.getTime());
-                            Calendar currentDate = new GregorianCalendar(day, month, year);
-
                         }
                     }, year, month, day);
             picker.show();

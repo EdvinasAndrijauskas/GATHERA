@@ -32,7 +32,20 @@ public class EventCardRepository {
     public void deleteEvent(String id) {
         myRef.child(id).removeValue();
     }
-
+    public void updateEvent(EventCard event)
+    {
+        init();
+        DatabaseReference editingEventCard = myRef.child(event.getId());
+        editingEventCard.child("category").setValue(event.getCategory());
+        editingEventCard.child("date").setValue(event.getDate());
+        editingEventCard.child("description").setValue(event.getDescription());
+        editingEventCard.child("eventName").setValue(event.getEventName());
+        editingEventCard.child("howManyPeopleAreComing").setValue(event.getHowManyPeopleAreComing());
+        editingEventCard.child("image").setValue(event.getImage());
+        editingEventCard.child("location").setValue(event.getLocation());
+        editingEventCard.child("peopleAttending").setValue(event.getPeopleAttending());
+        editingEventCard.child("time").setValue(event.getTime());
+    }
 
     public void saveEvent(int peopleAtending, String stringLocation, String userId, String currentDateString, String selectedCategory, String timeString, String nameOfTheEvent, String descriptionOfTheEvent, int numberOfPeople, String image) {
         myRef.push().setValue(new EventCard(peopleAtending, stringLocation, userId, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, numberOfPeople, image));
