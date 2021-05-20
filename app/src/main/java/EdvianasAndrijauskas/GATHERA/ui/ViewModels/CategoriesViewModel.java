@@ -1,12 +1,11 @@
-package EdvianasAndrijauskas.GATHERA.ui.categories;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.CategoriesEventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.CategoriesRepository;
 
 public class CategoriesViewModel extends ViewModel {
 

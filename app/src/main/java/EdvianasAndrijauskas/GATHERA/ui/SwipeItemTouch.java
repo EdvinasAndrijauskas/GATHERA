@@ -1,18 +1,16 @@
-package EdvianasAndrijauskas.GATHERA.ui.profile;
+package EdvianasAndrijauskas.GATHERA.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardAdapter;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardAdapter;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class SwipeItemTouch extends ItemTouchHelper.SimpleCallback {

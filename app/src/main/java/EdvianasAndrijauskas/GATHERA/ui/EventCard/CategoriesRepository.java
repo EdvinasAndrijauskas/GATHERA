@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.categories;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
 import java.util.ArrayList;
 

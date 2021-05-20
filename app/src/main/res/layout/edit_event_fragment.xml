@@ -10,7 +10,7 @@
         android:id="@+id/add_event_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.addPage.AddEventFragment">
+        tools:context=".ui.Fragments.AddEventFragment">
 
         <TextView
             android:id="@+id/edit_event"

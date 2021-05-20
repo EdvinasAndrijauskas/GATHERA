@@ -1,15 +1,11 @@
-package EdvianasAndrijauskas.GATHERA.ui;
-
-import android.util.EventLog;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
-
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardRepository;
 
 public class SharedViewModel extends ViewModel {
     private static SharedViewModel instance;

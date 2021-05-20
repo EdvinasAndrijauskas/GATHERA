@@ -16,9 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import java.text.MessageFormat;
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardAdapter;
-import EdvianasAndrijauskas.GATHERA.ui.home.HomeViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardAdapter;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.HomeViewModel;
 
 public class SelectedEventActivity extends AppCompatActivity {
 
@@ -64,7 +64,7 @@ public class SelectedEventActivity extends AppCompatActivity {
 
 
         TextView category = findViewById(R.id.selected_category);
-        category.setText(eventCard.getCategory());
+        category.setText("Category : "+eventCard.getCategory());
 
         ImageView image = findViewById(R.id.selected_imageView);
         Glide.with(this)

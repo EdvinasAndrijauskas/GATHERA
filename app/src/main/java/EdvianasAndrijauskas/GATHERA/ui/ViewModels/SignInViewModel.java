@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.SignIn;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
 import android.app.Application;
 

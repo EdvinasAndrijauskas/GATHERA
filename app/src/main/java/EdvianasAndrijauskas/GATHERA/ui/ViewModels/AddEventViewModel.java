@@ -1,20 +1,11 @@
-package EdvianasAndrijauskas.GATHERA.ui.addPage;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
 import android.app.Application;
-import android.net.Uri;
-import android.widget.TextView;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
-
-import EdvianasAndrijauskas.GATHERA.R;
 import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardRepository;
 
 public class AddEventViewModel extends AndroidViewModel {
 

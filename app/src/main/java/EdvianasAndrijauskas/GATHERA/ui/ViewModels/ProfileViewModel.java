@@ -1,20 +1,16 @@
-package EdvianasAndrijauskas.GATHERA.ui.profile;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardRepository;
 
 public class ProfileViewModel extends AndroidViewModel {
     private final UserRepository userRepository;

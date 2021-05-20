@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.home;
+package EdvianasAndrijauskas.GATHERA.ui.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import EdvianasAndrijauskas.GATHERA.R;
 import EdvianasAndrijauskas.GATHERA.ui.SelectedEventActivity;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.HomeViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardAdapter;
 
 
 public class HomeFragment extends Fragment implements EventCardAdapter.OnListItemClickListener {
@@ -35,7 +39,6 @@ public class HomeFragment extends Fragment implements EventCardAdapter.OnListIte
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         homeViewModel.init();
         checkIfSignedIn();
-        // Setting recycling view
         eventCardListRecycleView = root.findViewById(R.id.home_rv);
         eventCardListRecycleView.hasFixedSize();
         eventCardListRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -43,9 +46,8 @@ public class HomeFragment extends Fragment implements EventCardAdapter.OnListIte
         eventCardAdapter = new EventCardAdapter(getContext(), this);
         eventCardListRecycleView.setAdapter(eventCardAdapter);
 
-        homeViewModel.getAllEvents().observe(getViewLifecycleOwner(),  eventCardAdapter::updateList);
+        homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
         homeViewModel.getSearchedEvent().observe(getViewLifecycleOwner(), eventCardAdapter::updateList);
-        //Finding search by Id
         SearchView searchView = root.findViewById(R.id.works);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

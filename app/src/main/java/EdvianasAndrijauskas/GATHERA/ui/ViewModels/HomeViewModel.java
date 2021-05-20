@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.home;
+package EdvianasAndrijauskas.GATHERA.ui.ViewModels;
 
 import android.app.Application;
 
@@ -8,9 +8,10 @@ import androidx.lifecycle.LiveData;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import EdvianasAndrijauskas.GATHERA.ui.User.UserRepository;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardRepository;
 
 public class HomeViewModel extends AndroidViewModel {
     private final UserRepository userRepository;

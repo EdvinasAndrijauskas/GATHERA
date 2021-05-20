@@ -1,13 +1,11 @@
-package EdvianasAndrijauskas.GATHERA.ui.categories;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,8 +57,6 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
             super(itemView);
             title = itemView.findViewById(R.id.title);
             icon = itemView.findViewById(R.id.imageButton);
-//            if (icon.getTag().equals("R.drawable.unlikeCategory"))
-//                icon.setTag("R.drawable.unlikeCategory");
             picture = itemView.findViewById(R.id.picture);
 
             icon.setOnClickListener(new View.OnClickListener() {

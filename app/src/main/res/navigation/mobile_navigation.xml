@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.home.HomeFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.profile.ProfileFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.categories.CategoriesFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories">
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/navigation_signin"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.SignIn.SignInFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.SignInFragment"
         tools:layout="@layout/fragment_signin">
         <action
             android:id="@+id/action_navigation_signin_to_navigation_home"
@@ -46,12 +46,12 @@
     </fragment>
     <fragment
         android:id="@+id/navgiation_addEvent"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.addPage.AddEventFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.AddEventFragment"
         android:label="add_event_fragment"
         tools:layout="@layout/add_event_fragment" />
     <fragment
         android:id="@+id/navgiation_editEvent"
-        android:name="EdvianasAndrijauskas.GATHERA.ui.EditFragment"
+        android:name="EdvianasAndrijauskas.GATHERA.ui.Fragments.EditFragment"
         android:label="add_event_fragment"
         tools:layout="@layout/add_event_fragment" />
 
