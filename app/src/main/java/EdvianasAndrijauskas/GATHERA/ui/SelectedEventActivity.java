@@ -1,30 +1,20 @@
 package EdvianasAndrijauskas.GATHERA.ui;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
-
 import java.text.MessageFormat;
-
 import EdvianasAndrijauskas.GATHERA.R;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
 import EdvianasAndrijauskas.GATHERA.ui.home.EventCardAdapter;
@@ -142,7 +132,6 @@ public class SelectedEventActivity extends AppCompatActivity {
 
     public void updateViews() {
         joinCheck.setChecked(joinCheckFalseValue);
-
     }
 
 }

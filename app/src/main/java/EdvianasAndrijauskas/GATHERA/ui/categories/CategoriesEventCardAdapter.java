@@ -8,16 +8,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import EdvianasAndrijauskas.GATHERA.R;
+
 import java.util.ArrayList;
 
 public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesEventCardAdapter.ViewHolder> {
 
     private ArrayList<CategoriesEventCard> categoriesEventCardList;
-    public CategoriesEventCardAdapter(ArrayList<CategoriesEventCard> categories)
-    {
+
+    public CategoriesEventCardAdapter(ArrayList<CategoriesEventCard> categories) {
         this.categoriesEventCardList = categories;
     }
 
@@ -51,29 +54,34 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
             super(itemView);
             title = itemView.findViewById(R.id.title);
             icon = itemView.findViewById(R.id.imageButton);
+            icon.setTag("R.drawable.unlikeCategory");
             picture = itemView.findViewById(R.id.picture);
 
-
-//            title.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if(icon.getDrawable().equals(R.drawable.unlickedcategory))
-//                    {
-//                        title.setTextColor(Color.parseColor("#FFFF00"));
-//
-//                    }
-//                    else
-//                    {
-//                        title.setTextColor(Color.parseColor("#FFFFFF"));
-//                    }
-//                }
-//            });
-//            picture.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(picture.getContext(), "Pcture pressed", Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    {
+                        if (icon.getTag().equals("R.drawable.unlikeCategory"))
+                        {
+                            int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
+                            CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
+                            categoriesEventCardList.remove(index);
+                            categoriesEventCardList.add(0, card);
+                            card.setIconId(R.drawable.likedcategory);
+                            icon.setTag("R.drawable.likedCategory");
+                            notifyDataSetChanged();
+                        } else {
+                            int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
+                            CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
+                            categoriesEventCardList.remove(index);
+                            categoriesEventCardList.add(9, card);
+                            card.setIconId(R.drawable.unlickedcategory);
+                            icon.setTag("R.drawable.unlikeCategory");
+                            notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
         }
     }
 }
