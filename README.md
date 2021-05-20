@@ -2,6 +2,8 @@ GATHERA - An app which will help people to gather around for different kind of a
 
 I chose this app idea, because I feel that there is always lack of people when you need to gather a bigger group, so this app would make it easier to expand your friend list and have fun doing activities you like. 
 
+Link to youtube: https://youtu.be/gRMdbgkq1hM
+
 Must have requirements:
 
 - [x] As a user, I want to be able to make an account
