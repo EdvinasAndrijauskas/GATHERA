@@ -6,7 +6,7 @@ Must have requirements:
 
 - [x] As a user, I want to be able to make an account
 - [x] As a user, I want to be able to create an event
-- [] As a user, I want to be able to manage my events
+- [ ] As a user, I want to be able to manage my events
 - [x] As a user, I want to be able to see all available events
 - [x] As a user, I want to be able to join/unjoin the event
 
