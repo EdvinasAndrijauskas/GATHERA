@@ -1,6 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.home;
-
-import android.net.Uri;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,8 +10,6 @@ import java.util.ArrayList;
 
 
 public class EventCardRepository {
-    //    private final List<EventCard> eventCardArrayList = new ArrayList<>();
-//    private final MutableLiveData<List<EventCard>> searchedEventCard = new MutableLiveData<>();
     private static EventCardRepository instance;
     private DatabaseReference myRef;
     private EventCardLiveDataForUser eventCard;

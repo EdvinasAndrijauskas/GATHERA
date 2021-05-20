@@ -1,6 +1,5 @@
-package EdvianasAndrijauskas.GATHERA.ui.addPage;
+package EdvianasAndrijauskas.GATHERA.ui.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -13,8 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,36 +23,25 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.common.internal.Constants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.AddEventViewModel;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -222,10 +208,8 @@ public class AddEventFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             imageData = data.getData();
-            //fancier way to set image than view.setImage()
             view.setImageURI(imageData);
             uploadImage();
-//            Picasso.get().load(imageData).into(view);
         }
     }
 

@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.profile;
+package EdvianasAndrijauskas.GATHERA.ui.Fragments;
 
 import android.app.Application;
 import android.os.Build;
@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCardAdapter;
+import EdvianasAndrijauskas.GATHERA.ui.SwipeItemTouch;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.ProfileViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCardAdapter;
 
 public class ProfileFragment extends Fragment implements EventCardAdapter.OnListItemClickListener {
 
@@ -74,7 +76,6 @@ public class ProfileFragment extends Fragment implements EventCardAdapter.OnList
 
     public void signOut(View v) {
         profileViewModel.signOut();
-        //has to be bind somewhere(probably in profile (where do I want it ))
     }
 
     @Override

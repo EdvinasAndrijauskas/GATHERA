@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui;
+package EdvianasAndrijauskas.GATHERA.ui.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -32,7 +32,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.home.EventCard;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.SharedViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.EventCard;
 
 import static android.app.Activity.RESULT_OK;
 

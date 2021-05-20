@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.home;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
 
 import android.app.Activity;
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import EdvianasAndrijauskas.GATHERA.R;
-import EdvianasAndrijauskas.GATHERA.ui.SharedViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.SharedViewModel;
 
 import java.util.ArrayList;
 

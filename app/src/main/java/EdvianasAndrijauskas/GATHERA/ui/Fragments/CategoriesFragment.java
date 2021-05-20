@@ -1,27 +1,20 @@
-package EdvianasAndrijauskas.GATHERA.ui.categories;
+package EdvianasAndrijauskas.GATHERA.ui.Fragments;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import EdvianasAndrijauskas.GATHERA.R;
-
-import java.util.ArrayList;
+import EdvianasAndrijauskas.GATHERA.ui.ViewModels.CategoriesViewModel;
+import EdvianasAndrijauskas.GATHERA.ui.EventCard.CategoriesEventCardAdapter;
 
 public class CategoriesFragment extends Fragment {
 

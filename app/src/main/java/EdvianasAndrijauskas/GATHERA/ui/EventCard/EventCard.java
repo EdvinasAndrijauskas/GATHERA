@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.home;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
 import android.net.Uri;
 

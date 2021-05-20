@@ -1,4 +1,4 @@
-package EdvianasAndrijauskas.GATHERA.ui.categories;
+package EdvianasAndrijauskas.GATHERA.ui.EventCard;
 
 public class CategoriesEventCard {
     private int imageId;
