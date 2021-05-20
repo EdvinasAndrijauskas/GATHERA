@@ -12,7 +12,7 @@ Must have requirements:
 
 Should have requirements: 
 
-- [ ] As a user, I want to follow interested categories
+- [x] As a user, I want to follow interested categories
 - [x] As a user, I want to filter the events
 
 Could have requirements:
