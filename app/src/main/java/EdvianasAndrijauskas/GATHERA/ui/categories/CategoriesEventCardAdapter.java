@@ -61,8 +61,7 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
                 @Override
                 public void onClick(View v) {
                     {
-                        if (icon.getTag().equals("R.drawable.unlikeCategory"))
-                        {
+                        if (icon.getTag().equals("R.drawable.unlikeCategory")) {
                             int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
                             CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
                             categoriesEventCardList.remove(index);
@@ -71,6 +70,7 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
                             icon.setTag("R.drawable.likedCategory");
                             notifyDataSetChanged();
                         } else {
+                            System.out.println("nahui bybiai esat");
                             int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
                             CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
                             categoriesEventCardList.remove(index);
@@ -78,6 +78,7 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
                             card.setIconId(R.drawable.unlickedcategory);
                             icon.setTag("R.drawable.unlikeCategory");
                             notifyDataSetChanged();
+
                         }
                     }
                 }
