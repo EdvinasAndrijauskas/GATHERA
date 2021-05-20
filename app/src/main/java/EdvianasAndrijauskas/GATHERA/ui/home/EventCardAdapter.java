@@ -1,6 +1,7 @@
 package EdvianasAndrijauskas.GATHERA.ui.home;
 
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.view.LayoutInflater;
@@ -10,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import EdvianasAndrijauskas.GATHERA.R;
+import EdvianasAndrijauskas.GATHERA.ui.SharedViewModel;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,13 @@ public class EventCardAdapter extends RecyclerView.Adapter<EventCardAdapter.View
     public void deleteItem(int position) {
         EventCard eventCard = eventCardList.get(position);
         EventCardRepository.getInstance().deleteEvent(eventCard.getId());
+    }
+
+    public void editCard(int position) {
+        EventCard eventCard = eventCardList.get(position);
+        SharedViewModel.getInstance().updateEventCard(eventCard);
+        Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.navgiation_editEvent);
+        notifyItemChanged(position);
     }
 
     public interface OnListItemClickListener {
