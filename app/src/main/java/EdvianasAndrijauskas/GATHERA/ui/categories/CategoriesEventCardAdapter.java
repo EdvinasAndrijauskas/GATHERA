@@ -38,6 +38,11 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
         holder.title.setText(categoriesEventCardList.get(position).getTextView());
         holder.icon.setImageResource(categoriesEventCardList.get(position).getIconId());
         holder.picture.setImageResource(categoriesEventCardList.get(position).getImageId());
+        if (!categoriesEventCardList.get(position).isFav()) {
+            holder.icon.setTag("R.drawable.unlikeCategory");
+        } else {
+            holder.icon.setTag("R.drawable.likedCategory");
+        }
     }
 
     @Override
@@ -54,7 +59,8 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
             super(itemView);
             title = itemView.findViewById(R.id.title);
             icon = itemView.findViewById(R.id.imageButton);
-            icon.setTag("R.drawable.unlikeCategory");
+//            if (icon.getTag().equals("R.drawable.unlikeCategory"))
+//                icon.setTag("R.drawable.unlikeCategory");
             picture = itemView.findViewById(R.id.picture);
 
             icon.setOnClickListener(new View.OnClickListener() {
@@ -64,21 +70,18 @@ public class CategoriesEventCardAdapter extends RecyclerView.Adapter<CategoriesE
                         if (icon.getTag().equals("R.drawable.unlikeCategory")) {
                             int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
                             CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
+                            card.setFav(true);
                             categoriesEventCardList.remove(index);
                             categoriesEventCardList.add(0, card);
                             card.setIconId(R.drawable.likedcategory);
-                            icon.setTag("R.drawable.likedCategory");
                             notifyDataSetChanged();
                         } else {
-                            System.out.println("nahui bybiai esat");
                             int index = categoriesEventCardList.indexOf(categoriesEventCardList.get(getAdapterPosition()));
                             CategoriesEventCard card = categoriesEventCardList.get(getAdapterPosition());
                             categoriesEventCardList.remove(index);
                             categoriesEventCardList.add(9, card);
                             card.setIconId(R.drawable.unlickedcategory);
-                            icon.setTag("R.drawable.unlikeCategory");
                             notifyDataSetChanged();
-
                         }
                     }
                 }

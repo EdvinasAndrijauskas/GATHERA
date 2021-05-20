@@ -4,11 +4,21 @@ public class CategoriesEventCard {
     private int imageId;
     private String textView;
     private int iconId;
+    private boolean isFav;
 
     public CategoriesEventCard(int imageId, String textView, int iconId) {
         this.imageId = imageId;
         this.textView = textView;
         this.iconId = iconId;
+        this.isFav = false;
+    }
+
+    public void setFav(boolean fav) {
+        isFav = fav;
+    }
+
+    public boolean isFav() {
+        return isFav;
     }
 
     public int getImageId() {
