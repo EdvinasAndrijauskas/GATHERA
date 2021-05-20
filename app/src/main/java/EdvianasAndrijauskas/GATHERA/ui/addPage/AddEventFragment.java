@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -127,7 +128,6 @@ public class AddEventFragment extends Fragment {
         createButton = root.findViewById(R.id.add_event_createButton);
         createButton.setOnClickListener(v ->
         {
-            UploadDownloadImageFileToFirebaseStorage();
             String maxNumber = numberOfPeople.getText().toString().trim();
             String nameOfTheEvent = eventName.getText().toString().trim();
             String descriptionOfTheEvent = description.getText().toString().trim();
@@ -135,17 +135,11 @@ public class AddEventFragment extends Fragment {
             String minute = minuteEditText.getText().toString().trim();
             String stringLocation = location.getText().toString().trim();
 
-            if (maxNumber.isEmpty()) {
-                numberOfPeople.requestFocus();
-                numberOfPeople.setError("Enter number");
-                numberOfPeople.setText("");
+            if (spinnerEditText.getText().toString().isEmpty()) {
+                spinnerEditText.requestFocus();
+                spinnerEditText.setError("Enter date");
                 return;
-            }
-            if (stringLocation.isEmpty()) {
-                location.requestFocus();
-                location.setError("Enter Location");
-                location.setText("");
-                return;
+
             }
             if (nameOfTheEvent.isEmpty()) {
                 eventName.requestFocus();
@@ -158,11 +152,14 @@ public class AddEventFragment extends Fragment {
                 description.setError("Enter description");
                 return;
             }
-            if (spinnerEditText.getText().toString().isEmpty()) {
-                spinnerEditText.requestFocus();
-                spinnerEditText.setError("Enter date");
+
+            if (stringLocation.isEmpty()) {
+                location.requestFocus();
+                location.setError("Enter Location");
+                location.setText("");
                 return;
             }
+
             timeString = hour + ":" + minute;
             if (!isValidTime(timeString)) {
                 hourEditText.requestFocus();
@@ -173,14 +170,18 @@ public class AddEventFragment extends Fragment {
                 minuteEditText.setText("");
                 return;
             }
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    addEventViewModel.saveEventCard(0, stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), downloadUri);
-                }
-            }, 6000);
 
+            if (maxNumber.isEmpty()) {
+                numberOfPeople.requestFocus();
+                numberOfPeople.setError("Enter number");
+                numberOfPeople.setText("");
+                return;
+            }
+
+            if (downloadUri != null) {
+                addEventViewModel.saveEventCard(0, stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), downloadUri);
+            } else
+                addEventViewModel.saveEventCard(0, stringLocation, currentUser, currentDateString, selectedCategory, timeString, nameOfTheEvent, descriptionOfTheEvent, Integer.parseInt(maxNumber), null);
 
             navView.setVisibility(View.VISIBLE);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_home);
@@ -202,6 +203,8 @@ public class AddEventFragment extends Fragment {
                             cldr.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             spinnerEditText.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                             currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(cldr.getTime());
+                            Calendar currentDate = new GregorianCalendar(day, month, year);
+
                         }
                     }, year, month, day);
             picker.show();
@@ -223,6 +226,7 @@ public class AddEventFragment extends Fragment {
             imageData = data.getData();
             //fancier way to set image than view.setImage()
             view.setImageURI(imageData);
+            uploadImage();
 //            Picasso.get().load(imageData).into(view);
         }
     }
@@ -233,49 +237,37 @@ public class AddEventFragment extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    public void UploadDownloadImageFileToFirebaseStorage() {
+    public void uploadImage() {
         if (imageData != null) {
+
             StorageReference ref = storageRefs.child("Images/" + System.currentTimeMillis() + "." + getFileExtension(imageData));
             uploadTask = ref.putFile(imageData);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return ref.getDownloadUrl();
                 }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getContext(), "Image Uploaded Successfully ", Toast.LENGTH_SHORT).show();
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        progressDialog.dismiss();
+                        downloadUri = uri.toString();
+                        Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-        } else {
-
-            Toast.makeText(getContext(), "Please Select Image or Add Image Name", Toast.LENGTH_SHORT).show();
         }
-        final StorageReference ref = storageRefs.child("Images/" + System.currentTimeMillis() + "." + getFileExtension(imageData));
-        uploadTask = ref.putFile(imageData);
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-
-                return ref.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri uri = task.getResult();
-                    downloadUri = uri.toString();
-                } else {
-
-                }
-            }
-        });
     }
-
 
 
     public static boolean isValidTime(String time) {

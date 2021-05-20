@@ -15,7 +15,7 @@ public class CategoriesRepository {
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.hobbies, "Hobbies", R.drawable.unlickedcategory));
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.classes, "Classes", R.drawable.unlickedcategory));
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.show, "Shows", R.drawable.unlickedcategory));
-        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.seminar, "Seminar", R.drawable.unlickedcategory));
+        categoriesEventCardList.add(new CategoriesEventCard(R.drawable.seminar, "Seminars", R.drawable.unlickedcategory));
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.science, "Science", R.drawable.unlickedcategory));
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.gaming, "Gaming", R.drawable.unlickedcategory));
         categoriesEventCardList.add(new CategoriesEventCard(R.drawable.challenge, "Challenges", R.drawable.unlickedcategory));

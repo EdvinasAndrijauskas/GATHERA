@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
+import EdvianasAndrijauskas.GATHERA.ui.home.EventCardRepository;
+
 public class CategoriesViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private CategoriesRepository repository;
 
     public CategoriesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is categories fragment");
+        repository = CategoriesRepository.getInstance();
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public ArrayList<CategoriesEventCard> getCategoryCards() {
+        return repository.getCategoriesEventCardList();
     }
 }
